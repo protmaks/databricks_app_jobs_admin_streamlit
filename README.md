@@ -1,4 +1,4 @@
-<img src="assets/logo.png" alt="Streamlit Modular Template" height="100" style="max-height: 100px;">
+<img src="assets/logo.png" alt="Databricks App — Jobs Admin (Streamlit)" height="100" style="max-height: 100px;">
 
 developed by Databricks MVP - Maksim Pachkouski:
 
@@ -6,11 +6,9 @@ developed by Databricks MVP - Maksim Pachkouski:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-3572A5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/protmaks) &nbsp;
 [![GitHub](https://img.shields.io/github/followers/protmaks?label=Follow&style=social)](https://github.com/protmaks) &nbsp;
 
-# Databricks Apps — Streamlit Modular Template
+# Databricks App — Jobs Admin (Streamlit)
 
-[Article with description](https://medium.com/towards-data-engineering/databricks-apps-tutorial-scalable-streamlit-modular-template-for-production-83af8143520a)
-
-A starter template for building modular Streamlit applications, deployable as a [Databricks App](https://docs.databricks.com/en/dev-tools/databricks-apps/index.html).
+[Article with description](https://medium.com/@protmaks)
 
 It splits a Streamlit project into a tiny, flat structure instead of one large `app.py`:
 
@@ -25,54 +23,24 @@ Use this as a clean starting point and add your own pages.
 ## Project structure
 
 ```
-app.py                  # st.set_page_config + st.navigation
-app.yaml                # Databricks App run command
+app.py                          # st.set_page_config + st.navigation
+app.yaml                        # Databricks App run command
 requirements.txt
 pages/
-  home.py               # Renders this README
-  example.py            # Hello-world page split into 2 tabs
-  example_tabs/
-    greeting.py         # def render()  — text input tab
-    counter.py          # def render()  — session_state tab
-  product.py            # Two-column layout
-  form.py               # st.form with submit button
+  description.py                # Main description page
+  jobs_and_pipelines/
+    jobs_run_daily.py           # Daily jobs monitoring
+  settings/
+    __init__.py
+    settings_page.py            # Settings page entry
+    storage.py                  # Settings storage utilities
 assets/
   logo.png, logo_sm.svg
+  apps_enable_install_from_git.png
+  apps_enable_user_auth.png
 ```
 
 Each page in `pages/` is independent — it loads its own data, renders its own widgets. Modularity here means **one page = one file**: easy to find, easy to delete, easy to copy as a starting point for a new page.
-
-### Adding a new page
-
-1. Create `pages/my_page.py`. Inside, write a regular Streamlit script (`st.header`, widgets, etc.).
-2. Register it in `app.py` inside the `menu` dict:
-   ```python
-   "My section": [
-       st.Page("pages/my_page.py", title="My page", icon=":material/star:"),
-   ],
-   ```
-
-### Splitting one page into tabs across multiple files
-
-When a page grows, you can split it into tabs where each tab lives in its own file. See [pages/example.py](pages/example.py) — it delegates each tab to a module in [pages/example_tabs/](pages/example_tabs/) via a `render()` function:
-
-```python
-tab_a, tab_b = st.tabs(["Greeting", "Counter"])
-
-with tab_a:
-    from pages.example_tabs.greeting import render as render_greeting
-    render_greeting()
-
-with tab_b:
-    from pages.example_tabs.counter import render as render_counter
-    render_counter()
-```
-
-Each tab module is a plain Python file with one `render()` function — no top-level `st.*` calls, so the parent page controls layout. Imports are inside the `with tab:` block so unused tabs don't run their imports. Pass shared state (e.g. a loaded DataFrame) as arguments: `render(df)`.
-
-### When pages start to share code
-
-If two pages need the same loader or widget, extract it. The simplest path: a single `shared.py` in the project root. Only introduce a `components/` package once you have several modules to put in it.
 
 ---
 
