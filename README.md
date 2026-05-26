@@ -17,7 +17,7 @@ It splits a Streamlit project into a tiny, flat structure instead of one large `
 - **`assets/`** — static files: logos.
 
 Use this as a clean starting point and add your own pages.
-
+ 
 ---
 
 ## Project structure
