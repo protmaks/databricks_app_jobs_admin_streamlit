@@ -6,7 +6,7 @@ developed by Databricks MVP - Maksim Pachkouski:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-3572A5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/protmaks) &nbsp;
 [![GitHub](https://img.shields.io/github/followers/protmaks?label=Follow&style=social)](https://github.com/protmaks) &nbsp;
 
-# Databricks App — Jobs Admin (Streamlit)
+# Databricks App — Jobs Admin v0.1 (Streamlit)
 
 [Article with description](https://medium.com/@protmaks)
 
