@@ -1,2 +1,9 @@
+altair==5.5.0
+croniter==6.0.0
+databricks-sdk==0.96.0
+duckdb>=1.0.0
+pandas==2.2.3
+pytest==8.3.4
 python-dotenv==1.2.2
-streamlit==1.41.1
+pytz==2026.1.post1
+streamlit==1.38.0

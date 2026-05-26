@@ -5,8 +5,8 @@ import pandas as pd
 import pytz
 import streamlit as st
 from databricks.sdk.service.jobs import RunType
-from menu.compute.utils import make_workspace_client, COMMON_TZ, match_team_rules
-from menu.settings.storage import get_cached_settings, get_cached_user_prefs
+from pages.utils import make_workspace_client, COMMON_TZ, match_team_rules
+from pages.settings.storage import get_cached_settings, get_cached_user_prefs
 
 st.header("Job Runs History")
 

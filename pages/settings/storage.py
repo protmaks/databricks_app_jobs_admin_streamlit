@@ -26,7 +26,6 @@ _LOCAL_USER_PREFS_DIR = Path(__file__).parent.parent.parent / "user_prefs_local"
 DEFAULT_SETTINGS: dict = {
     "version": 1,
     "timezone": "UTC",
-    "min_runtime_version": "16.4",
     "teams": [],
     "default_teams": [],
 }
@@ -35,7 +34,6 @@ DEFAULT_SETTINGS: dict = {
 def _migrate(data: dict) -> dict:
     """Backfill new fields added to settings without a version bump."""
     data.setdefault("default_teams", [])
-    data.setdefault("min_runtime_version", "16.4")
     return data
 
 
@@ -87,17 +85,19 @@ def save_settings(w: WorkspaceClient, settings: dict) -> None:
     Raises RuntimeError if both fail.
     """
     raw = json.dumps(settings, indent=2, ensure_ascii=False).encode("utf-8")
+    ws_error = None
     try:
         _ws_write(w, _WS_SETTINGS_PATH, raw)
         return
     except Exception as ws_exc:
+        ws_error = ws_exc  # save for error message
         pass  # try local fallback
 
     try:
         _save_local(settings)
     except Exception as local_exc:
         raise RuntimeError(
-            f"Failed to save settings. Workspace: {ws_exc}. Local: {local_exc}"
+            f"Failed to save settings. Workspace: {ws_error}. Local: {local_exc}"
         ) from local_exc
 
 
@@ -149,10 +149,12 @@ def load_user_prefs(w: WorkspaceClient) -> dict:
 def save_user_prefs(w: WorkspaceClient, prefs: dict) -> None:
     """Save per-user preferences to Workspace Files, falling back to local file."""
     raw = json.dumps(prefs, indent=2, ensure_ascii=False).encode("utf-8")
+    ws_error = None
     try:
         _ws_write(w, _user_prefs_ws_path(w), raw)
         return
     except Exception as ws_exc:
+        ws_error = ws_exc  # save for error message
         pass
     try:
         _user_prefs_local_path(w).write_text(
@@ -160,7 +162,7 @@ def save_user_prefs(w: WorkspaceClient, prefs: dict) -> None:
         )
     except Exception as local_exc:
         raise RuntimeError(
-            f"Failed to save user prefs. Workspace: {ws_exc}. Local: {local_exc}"
+            f"Failed to save user prefs. Workspace: {ws_error}. Local: {local_exc}"
         ) from local_exc
 
 

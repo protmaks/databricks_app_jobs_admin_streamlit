@@ -26,8 +26,10 @@ Use this as a clean starting point and add your own pages.
 app.py                          # st.set_page_config + st.navigation
 app.yaml                        # Databricks App run command
 requirements.txt
+pytest.ini                      # Pytest configuration
 pages/
   description.py                # Main description page
+  utils.py                      # Utility functions
   jobs_and_pipelines/
     jobs_run_daily.py           # Daily jobs monitoring
   settings/
@@ -38,6 +40,16 @@ assets/
   logo.png, logo_sm.svg
   apps_enable_install_from_git.png
   apps_enable_user_auth.png
+tests/                          # Test suite (84 tests)
+  conftest.py                   # Pytest fixtures
+  test_utils.py                 # Utils tests
+  test_storage.py               # Storage tests
+  test_integration.py           # Integration tests
+  test_workspace_client.py      # Client tests
+  test_user_prefs.py            # User prefs tests
+  test_validation.py            # Validation tests
+  test_performance.py           # Performance tests
+  README.md                     # Testing documentation
 ```
 
 Each page in `pages/` is independent — it loads its own data, renders its own widgets. Modularity here means **one page = one file**: easy to find, easy to delete, easy to copy as a starting point for a new page.
@@ -59,6 +71,37 @@ Each page in `pages/` is independent — it loads its own data, renders its own 
    ```bash
    streamlit run app.py
    ```
+
+---
+
+## Testing
+
+The project includes comprehensive test coverage with 84 tests covering all core functionality.
+
+### Quick Start
+
+```bash
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run specific test file
+pytest tests/test_utils.py
+```
+
+### Test Coverage
+
+- **test_utils.py** (17 tests) - Team matching rules and utilities
+- **test_storage.py** (13 tests) - Settings storage and persistence
+- **test_integration.py** (6 tests) - End-to-end scenarios
+- **test_workspace_client.py** (8 tests) - Databricks client initialization
+- **test_user_prefs.py** (15 tests) - User preferences management
+- **test_validation.py** (16 tests) - Configuration validation
+- **test_performance.py** (9 tests) - Performance and stress tests
+
+For detailed testing documentation, see [tests/README.md](tests/README.md).
 
 ---
 
