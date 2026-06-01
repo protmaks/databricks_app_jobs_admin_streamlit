@@ -8,7 +8,7 @@ developed by Databricks MVP - Maksim Pachkouski:
 
 # Databricks App — Jobs Admin v0.1 (Streamlit)
 
-[Article with description]([https://medium.com/@protmaks](https://medium.com/data-engineer-things/databricks-jobs-monitoring-in-your-custom-databricks-app-67c81014473f))
+[Article with description](https://medium.com/data-engineer-things/databricks-jobs-monitoring-in-your-custom-databricks-app-67c81014473f)
 
 It splits a Streamlit project into a tiny, flat structure instead of one large `app.py`:
 
