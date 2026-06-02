@@ -1,4 +1,4 @@
-<img src="assets/logo.png" alt="Databricks App — Jobs Admin (Streamlit)" height="100" style="max-height: 100px;">
+![Enable User identity for Databricks Apps](assets/logo.png)
 
 developed by Databricks MVP - Maksim Pachkouski:
 
