@@ -40,7 +40,6 @@ selected_tz = col_tz.selectbox(
 )
 lookback_days = col_days.slider(
     "Lookback days", min_value=1, max_value=60,
-    value=st.session_state["last_run_days"],
     key="last_run_days", on_change=_on_days_change,
 )
 if "last_run_teams" not in st.session_state:
@@ -49,7 +48,7 @@ if "last_run_teams" not in st.session_state:
     _default_team_names = [_id_to_name[tid] for tid in _default_team_ids if tid in _id_to_name]
     st.session_state["last_run_teams"] = [n for n in _default_team_names if n in _team_names]
 selected_teams = col_teams.multiselect(
-    "Teams", options=_team_names, default=st.session_state["last_run_teams"],
+    "Teams", options=_team_names,
     placeholder="All teams", key="last_run_teams",
 )
 
