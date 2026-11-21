@@ -5,6 +5,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import streamlit as st
+from databricks.sdk import WorkspaceClient
+
+# Temporary server-side identity and API access check.
+w = WorkspaceClient()
+print("Identity:", w.current_user.me().user_name)
+for job in w.jobs.list():
+    print("Job:", job.job_id)
+for cluster in w.clusters.list():
+    print("Cluster:", cluster.cluster_name)
 
 st.set_page_config(
     page_title="Streamlit Modular Template",
